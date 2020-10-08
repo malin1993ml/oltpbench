@@ -53,7 +53,7 @@ public class OrderStatus extends TPCCProcedure {
 
 	public SQLStmt payGetCustSQL = new SQLStmt(
             "SELECT C_FIRST, C_LAST, C_CREDIT, C_BALANCE, C_YTD_PAYMENT, " +
-            "       C_PAYMENT_CNT, " +
+            "       C_PAYMENT_CNT " +
             "  FROM " + TPCCConstants.TABLENAME_CUSTOMER +
             " WHERE C_W_ID = ? " +
             "   AND C_D_ID = ? " +
@@ -61,7 +61,7 @@ public class OrderStatus extends TPCCProcedure {
 
 	public SQLStmt customerByNameSQL = new SQLStmt(
             "SELECT C_FIRST, C_ID, C_CREDIT, " +
-            "       C_BALANCE, C_YTD_PAYMENT, C_PAYMENT_CNT" +
+            "       C_BALANCE, C_YTD_PAYMENT, C_PAYMENT_CNT " +
             "  FROM " + TPCCConstants.TABLENAME_CUSTOMER +
             " WHERE C_W_ID = ? " +
             "   AND C_D_ID = ? " +
