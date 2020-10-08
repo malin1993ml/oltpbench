@@ -59,9 +59,8 @@ public class Payment extends TPCCProcedure {
             "   AND D_ID = ?");
     
     public SQLStmt payGetCustSQL = new SQLStmt(
-            "SELECT C_FIRST, C_MIDDLE, C_LAST, C_STREET_1, C_STREET_2, " + 
-            "       C_CITY, C_STATE, C_ZIP, C_PHONE, C_CREDIT, C_CREDIT_LIM, " + 
-            "       C_DISCOUNT, C_BALANCE, C_YTD_PAYMENT, C_PAYMENT_CNT, C_SINCE " +
+            "SELECT C_FIRST, C_LAST, C_CREDIT, C_BALANCE, C_YTD_PAYMENT, " +
+            "       C_PAYMENT_CNT, " +
             "  FROM " + TPCCConstants.TABLENAME_CUSTOMER + 
             " WHERE C_W_ID = ? " +
             "   AND C_D_ID = ? " +
@@ -99,9 +98,8 @@ public class Payment extends TPCCProcedure {
             " VALUES (?,?,?,?,?,?,?,?)");
     
     public SQLStmt customerByNameSQL = new SQLStmt(
-            "SELECT C_FIRST, C_MIDDLE, C_ID, C_STREET_1, C_STREET_2, C_CITY, " + 
-            "       C_STATE, C_ZIP, C_PHONE, C_CREDIT, C_CREDIT_LIM, C_DISCOUNT, " +
-            "       C_BALANCE, C_YTD_PAYMENT, C_PAYMENT_CNT, C_SINCE " +
+            "SELECT C_FIRST, C_ID, C_CREDIT, " +
+            "       C_BALANCE, C_YTD_PAYMENT, C_PAYMENT_CNT" +
             "  FROM " + TPCCConstants.TABLENAME_CUSTOMER + 
             " WHERE C_W_ID = ? " +
             "   AND C_D_ID = ? " +
@@ -321,35 +319,11 @@ public class Payment extends TPCCProcedure {
             terminalMessage.append("\n   Name:    ");
             terminalMessage.append(c.c_first);
             terminalMessage.append(" ");
-            terminalMessage.append(c.c_middle);
-            terminalMessage.append(" ");
             terminalMessage.append(c.c_last);
-            terminalMessage.append("\n   Street:  ");
-            terminalMessage.append(c.c_street_1);
-            terminalMessage.append("\n   Street:  ");
-            terminalMessage.append(c.c_street_2);
-            terminalMessage.append("\n   City:    ");
-            terminalMessage.append(c.c_city);
-            terminalMessage.append("   State: ");
-            terminalMessage.append(c.c_state);
-            terminalMessage.append("  Zip: ");
-            terminalMessage.append(c.c_zip);
-            terminalMessage.append("\n   Since:   ");
-            if (c.c_since != null) {
-                terminalMessage.append(c.c_since.toString());
-            } else {
-                terminalMessage.append("");
-            }
             terminalMessage.append("\n   Credit:  ");
             terminalMessage.append(c.c_credit);
-            terminalMessage.append("\n   %Disc:   ");
-            terminalMessage.append(c.c_discount);
-            terminalMessage.append("\n   Phone:   ");
-            terminalMessage.append(c.c_phone);
             terminalMessage.append("\n\n Amount Paid:      ");
             terminalMessage.append(paymentAmount);
-            terminalMessage.append("\n Credit Limit:     ");
-            terminalMessage.append(c.c_credit_lim);
             terminalMessage.append("\n New Cust-Balance: ");
             terminalMessage.append(c.c_balance);
             if (c.c_credit.equals("BC")) {

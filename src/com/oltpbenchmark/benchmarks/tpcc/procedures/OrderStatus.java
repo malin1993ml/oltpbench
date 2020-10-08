@@ -52,22 +52,20 @@ public class OrderStatus extends TPCCProcedure {
             "   AND OL_W_ID = ?");
 
 	public SQLStmt payGetCustSQL = new SQLStmt(
-	        "SELECT C_FIRST, C_MIDDLE, C_LAST, C_STREET_1, C_STREET_2, " + 
-            "       C_CITY, C_STATE, C_ZIP, C_PHONE, C_CREDIT, C_CREDIT_LIM, " + 
-            "       C_DISCOUNT, C_BALANCE, C_YTD_PAYMENT, C_PAYMENT_CNT, C_SINCE " +
-            "  FROM " + TPCCConstants.TABLENAME_CUSTOMER + 
+            "SELECT C_FIRST, C_LAST, C_CREDIT, C_BALANCE, C_YTD_PAYMENT, " +
+            "       C_PAYMENT_CNT, " +
+            "  FROM " + TPCCConstants.TABLENAME_CUSTOMER +
             " WHERE C_W_ID = ? " +
             "   AND C_D_ID = ? " +
             "   AND C_ID = ?");
 
 	public SQLStmt customerByNameSQL = new SQLStmt(
-	        "SELECT C_FIRST, C_MIDDLE, C_ID, C_STREET_1, C_STREET_2, C_CITY, " + 
-            "       C_STATE, C_ZIP, C_PHONE, C_CREDIT, C_CREDIT_LIM, C_DISCOUNT, " +
-            "       C_BALANCE, C_YTD_PAYMENT, C_PAYMENT_CNT, C_SINCE " +
-            "  FROM " + TPCCConstants.TABLENAME_CUSTOMER + 
+            "SELECT C_FIRST, C_ID, C_CREDIT, " +
+            "       C_BALANCE, C_YTD_PAYMENT, C_PAYMENT_CNT" +
+            "  FROM " + TPCCConstants.TABLENAME_CUSTOMER +
             " WHERE C_W_ID = ? " +
             "   AND C_D_ID = ? " +
-            "   AND C_LAST = ? " + 
+            "   AND C_LAST = ? " +
             " ORDER BY C_FIRST");
 
 	private PreparedStatement ordStatGetNewestOrd = null;
@@ -187,8 +185,6 @@ public class OrderStatus extends TPCCProcedure {
             sb.append(c.c_id);
             sb.append("\n   Name:    ");
             sb.append(c.c_first);
-            sb.append(" ");
-            sb.append(c.c_middle);
             sb.append(" ");
             sb.append(c.c_last);
             sb.append("\n   Balance: ");
